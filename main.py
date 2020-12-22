@@ -1,4 +1,5 @@
-from jsp import ACOp, GraphJSP
+from jsp import ACOp, GraphJSP, JSPNode
+import numpy as np
 
 #Read standard instances JSP
 raw_instance_data = []

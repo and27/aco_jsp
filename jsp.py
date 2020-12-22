@@ -1,4 +1,4 @@
-#Import required libraries
+#import required libraries
 import math
 import sys
 import argparse
@@ -269,7 +269,7 @@ class _ant(object):
         if (node_selected.id+1) % node_selected.total_machines != 0:
             #print("nodeid: ", node_selected.id)
             #print("result", node_selected.id+1 % node_selected.total_machines)
-            self.allow.append(self.nodes[node_selected.job_id][node_selected.id % graph.total_machines + 1])
+            self.allow.append(self.nodes[node_selected.job_id][node_selected.id % self.graph.total_machines + 1])
         else:
             pass
         
@@ -320,3 +320,4 @@ class JSPNode(object):
         self.total_machines = total_machines
         self.total_jobs = total_jobs
 
+aco = ACOp(cont_ant=5, generations=10, alfa=1.0, beta=1.0, ro=0.5, Q=0.3)  
