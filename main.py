@@ -1,5 +1,6 @@
-from jsp import ACOp, GraphJSP, JSPNode
+from jsp_parallel import ACOp, GraphJSP, JSPNode
 import numpy as np
+from time import time
 
 #Read standard instances JSP
 raw_instance_data = []
@@ -50,7 +51,14 @@ nodes_matrix = np.array(nodes).reshape((jobs_n,jobs_m))
 #Now we also create the instance of the whole graph as:
 graph = GraphJSP(jobs_n, jobs_m, nodes_matrix)
 
-aco = ACOp(cont_ant=5, generations=10, alfa=1.0, beta=1.0, ro=0.5, Q=0.3)  
+start = time()
+aco = ACOp(cont_ant=200, generations=5, alfa=1.0, beta=1.0, ro=0.5, Q=0.5)  
 
-#Another alternative is:
-aco.resolve(graph)
+try:
+    best_cost, best_sol = aco.resolve(graph)
+    end = time()
+    overhead = end-start
+    print(best_cost, overhead)
+
+except:
+    pass

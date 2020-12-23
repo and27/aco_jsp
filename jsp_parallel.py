@@ -89,12 +89,12 @@ class ACOp(object):
         best_cost = float('inf')
         best_sol = []
         for g in range(self.generations):
-            print("\nRunning generation: ", g)
+            #print("\nRunning generation: ", g)
             comm = MPI.COMM_WORLD
             size = comm.Get_size()
             _rank = comm.Get_rank()          
                 
-            ants = [_ant](self,graph) for i in range(int(self.cont_ant/size))
+            ants = [_ant(self,graph) for i in range(int(self.cont_ant/size))]
             remaining = self.cont_ant % size
             for r in range(1, remaining+1):
                 if _rank == r:
@@ -111,14 +111,14 @@ class ACOp(object):
                 """
                 for i in range(graph.total_nodes-1):
                     a._next_node()
-                print(" . ", end='')
-                time.sleep(10/100)
+                #print(" . ", end='')
+                #time.sleep(10/100)
                 
                 #for v in a.visited:
                     #print(v.id)
                 if a.total_cost < best_cost:
                     best_cost = a.total_cost
-                    print("\nNew best cost found: ", best_cost)   
+                    #print("\nNew best cost found: ", best_cost)   
                 #print("makespan is:", max(a.machine_release_time))
                 a._update_pheromone_delta()
 
@@ -126,7 +126,7 @@ class ACOp(object):
                 comm.send(ants, dest=0, tag=1)
             else:
                 for i in range(1,size):
-                    for ant in comm.recv(source=i, tag=1)
+                    for ant in comm.recv(source=i, tag=1):
                         ants.append(ant)
                 self._update_pheromone(graph, ants)
        
