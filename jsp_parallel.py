@@ -173,8 +173,8 @@ class _ant(object):
         #para jsp se pueden considerar varias metricas y variaciones para crear la matriz heurística
         self.eta = [
             [ self.nodes[i][j].op_time
-                 for i in range (self.graph.total_machines) ] 
-                 for j in range (self.graph.total_jobs)
+                 for i in range (self.graph.total_jobs) ] 
+                 for j in range (self.graph.total_machines)
             ]
 
         inicio = random.randint(0, len(self.allow)-1)  # random start
@@ -316,7 +316,7 @@ class _ant(object):
             self.pheromone_delta[i][j] = self.colony.Q / self.total_cost       
              
 class GraphJSP(object):
-    def __init__(self, total_machines, total_jobs, nodes_matrix):
+    def __init__(self, total_jobs, total_machines, nodes_matrix):
         self.total_machines = total_machines
         self.total_jobs = total_jobs
         self.total_nodes = total_machines*total_jobs

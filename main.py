@@ -7,12 +7,23 @@ raw_instance_data = []
 job_op = []  #Operation Time
 job_ma = []  #Machines
 
-with open("instances/abz6") as f:
-    lines = f.readlines()
-    mtd = lines[4].strip().split(" ") # mt-metadata (number of jobs and machines)
-    for i in range (5, len(lines)):
-        raw_line = lines[i].strip().replace("  ", " ").split(" ")
-        raw_instance_data.append(raw_line) 
+ta = False
+
+if (ta == True):
+    with open("instances/ta45") as f:
+        lines = f.readlines()
+        mtd = lines[0].strip().split(" ")
+        for i in range (1, len(lines)):
+            raw_line = lines[i].strip().replace("  ", " ").split(" ")
+            raw_instance_data.append(raw_line)
+
+else:
+    with open("instances/abz8") as f:
+        lines = f.readlines()
+        mtd = lines[4].strip().split(" ") # mt-metadata (number of jobs and machines)
+        for i in range (5, len(lines)):
+            raw_line = lines[i].strip().replace("  ", " ").split(" ")
+            raw_instance_data.append(raw_line) 
     
 jobs_n = int(mtd[0])
 jobs_m = int(mtd[1])
@@ -52,7 +63,7 @@ nodes_matrix = np.array(nodes).reshape((jobs_n,jobs_m))
 graph = GraphJSP(jobs_n, jobs_m, nodes_matrix)
 
 start = time()
-aco = ACOp(cont_ant=200, generations=5, alfa=1.0, beta=1.0, ro=0.5, Q=0.5)  
+aco = ACOp(cont_ant=100, generations=5, alfa=1.0, beta=1.0, ro=0.5, Q=0.5)  
 
 try:
     best_cost, best_sol = aco.resolve(graph)
